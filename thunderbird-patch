@@ -70,6 +70,13 @@ sed -i -e '/^\s*<!ENTITY [^\.]*Cmd\.keycode "/{  s:^\s*:<!-- :; s:$: -->: ;}' \
 chrome/en-US/locale/en-US/messenger/messengercompose/messengercompose.dtd \
 chrome/messenger/content/messenger/messengercompose/messengercompose.xul
 
+# removing Customize From Address... pop-up menu item
+# for details https://unix.stackexchange.com/questions/592497/thunderbird-remove-customize-from-address-from-the-identities-list-when-sendi
+sed -i -e '/^\s*<!ENTITY customizeFromAddress.* "/{  s:^\s*:<!-- :; s:$: -->: ;}' \
+chrome/en-US/locale/en-US/messenger/messengercompose/messengercompose.dtd
+sed -i -e ':a /^\s*<.*="cmd_customizeFromAddress.*"$/ { N; s:\n: :; s:^\s*:<!-- :; s:$: -->: ;ta; };' \
+chrome/messenger/content/messenger/messengercompose/messengercompose.xul
+
 # End of patches
 ########################################
 
