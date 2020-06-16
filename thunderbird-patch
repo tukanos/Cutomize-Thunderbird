@@ -77,6 +77,14 @@ chrome/en-US/locale/en-US/messenger/messengercompose/messengercompose.dtd
 sed -i -e ':a /^\s*<.*="cmd_customizeFromAddress.*"$/ { N; s:\n: :; s:^\s*:<!-- :; s:$: -->: ;ta; };' \
 chrome/messenger/content/messenger/messengercompose/messengercompose.xul
 
+# removing the separator from the list of addresses in the FROM pop-up
+sed -i -e "/^\s*menulist.menupopup.appendChild.*\.createXULE.*;$/ s|^|//|;" \
+chrome/messenger/content/messenger/messengercompose/MsgComposeCommands.js
+# removing the actual cmd_customizeFromAddress. range - adding comments on multiple lines
+sed -i -e "/^\s\smenulist.menupopup$/, /FromAddress.*);$/ s|^|//|" \
+chrome/messenger/content/messenger/messengercompose/MsgComposeCommands.js
+
+
 # End of patches
 ########################################
 
